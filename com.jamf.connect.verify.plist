@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DontShowWelcome</key>
+	<true/>
+	<key>ForceSignInWindow</key>
+	<true/>
+	<key>LocalPasswordIgnore</key>
+	<false/>
+	<key>OIDCChangePasswordURL</key>
+	<string>https://aka.ms/sspr</string>
+	<key>OOIDCResetPasswordURL</key>
+	<string>https://aka.ms/sspr</string>
+	<key>OIDCProvider</key>
+	<string>Azure</string>
+	<key>OIDCROPGID</key>
+	<string>####a4dd-####-47ac-####-01601d3b####</string>
+	<key>OIDCRedirectURI</key>
+	<string>https://127.0.0.1/jamfconnect</string>   
+</dict>
+</plist>
