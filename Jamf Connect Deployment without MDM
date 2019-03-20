@@ -1,6 +1,6 @@
 #!/bin/bash
 #Created by Kyle Ericson
-#Date March 15th 2019
+#Date March 19th 2019
 
 /usr/bin/profiles -I -F /tmp/Jamf-Connect/key.mobileconfig
 
