@@ -26,7 +26,7 @@ security delete-generic-password -l 'com.microsoft.CompanyPortal'
 security delete-generic-password -l 'com.microsoft.CompanyPortal.HockeySDK'
 security delete-generic-password -l 'enterpriseregistration.windows.net'
 
-#Rreplace-with-your-adfs-server-name-FQDN
+#Replace-with-your-adfs-server-name-FQDN
 security delete-generic-password -l 'https://replace-with-your-adfs-server-name-FQDN.com/adfs/ls'
 security delete-generic-password -l 'https://replace-with-your-adfs-server-name-FQDN.com/adfs/ls/'
 #Replace-with-your-adfs-server-name-FQDN
