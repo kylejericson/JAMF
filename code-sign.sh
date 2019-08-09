@@ -2,6 +2,12 @@
 #created by Kyle Ericson
 #Date Aug 9th 2019
 #Version 1.0
+#Read me for: code-sign.sh
+#This is a easy to use GUI scipt for codesigning .pkg files
+#Update the script with your dev ID
+#Then use this script to make it into a .app
+#https://gist.github.com/mathiasbynens/674099#file-appify
+
 
 consoleUser=$(stat -f %Su /dev/console)
 
