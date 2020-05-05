@@ -1,0 +1,3 @@
+Replace "Developer ID Installer: Your Company Name (##AAAA#AA)" with your Developer ID Installer
+Use this to create a quick action item to code sign apps.
+Or import the workflow item into Automator and make your changes. Then export and then install
