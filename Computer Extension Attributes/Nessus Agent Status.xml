@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Nessus Agent Status</displayName>
+<description>Running or Stopped</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/sh&#13;
+&#13;
+# Check to see if Nessus Agent is running&#13;
+NessusAgentRunning="$(sudo launchctl list com.tenablesecurity.nessusagent | grep "PID" | awk '{ print $1 }' | tr -d '\"')"&#13;
+if [ "$NessusAgentRunning" = "PID" ]; then&#13;
+  echo "&lt;result&gt;Running&lt;/result&gt;"&#13;
+else&#13;
+  echo "&lt;result&gt;Stopped&lt;/result&gt;"&#13;
+fi</scriptContentsMac>
+</extensionAttribute>
