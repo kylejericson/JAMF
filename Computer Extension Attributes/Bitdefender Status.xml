@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Bitdefender Status</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/bash&#13;
+if [ -d /Library/Bitdefender/AVP/Uninstaller/EndpointSecurityforMacUninstaller.app ]; then&#13;
+    echo "&lt;result&gt;Installed&lt;/result&gt;"&#13;
+else&#13;
+    echo "&lt;result&gt;NotInstalled&lt;/result&gt;"&#13;
+fi&#13;
+&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
