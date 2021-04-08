@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Cisco AMP Status</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+&#13;
+# Check to see if Cisco AMP is running&#13;
+AMPrunning="$(sudo launchctl list com.cisco.amp.daemon | grep "PID" | awk '{ print $1 }' | tr -d '\"')"&#13;
+if [ "$AMPrunning" = "PID" ]; then&#13;
+  echo "&lt;result&gt;Running&lt;/result&gt;"&#13;
+else&#13;
+  echo "&lt;result&gt;Stopped&lt;/result&gt;"&#13;
+fi</scriptContentsMac>
+</extensionAttribute>

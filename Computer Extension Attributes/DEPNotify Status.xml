@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>DEPNotify Status</displayName>
+<description>Will return if DEPNotify has Provisioned or Not Provisioned.</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+#Kyle Ericson&#13;
+&#13;
+if [[ -e /private/var/tmp/com.depnotify.provisioning.done ]]; then&#13;
+&#13;
+    echo "&lt;result&gt;Provisioned&lt;/result&gt;"&#13;
+&#13;
+else&#13;
+&#13;
+    echo "&lt;result&gt;Not Provisioned&lt;/result&gt;"&#13;
+&#13;
+fi&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
