@@ -217,7 +217,8 @@ fi
 				#Here you could update an extension attribute (API CALL) to group problematic Macs in a smart group.
 				#The only workaround to fix this is to promote the end user to admin, leverage it to manipulate the tokens and demote it again.
 				#I tried it, it works and it does not harm the tokens.
-				dscl . -append /groups/admin GroupMembership $userName
+				#dscl . -append /groups/admin GroupMembership $userName
+                /usr/sbin/dseditgroup -o edit -a $userName -t user admin
 				echo "End user promoted to admin!"
 
 				sysadminctl -adminUser $userName -adminPassword $userPass -secureTokenOn $addAdminUser -password $addAdminUserPassword
@@ -225,7 +226,8 @@ fi
 
 				diskutil apfs listcryptousers /
 
-				dscl . -delete /groups/admin GroupMembership $userName
+				#dscl . -delete /groups/admin GroupMembership $userName
+                /usr/sbin/dseditgroup -o edit -d $userName -t user admin
 				echo "End user demoted back to standard!"	
 				#exit 1
 				fi
