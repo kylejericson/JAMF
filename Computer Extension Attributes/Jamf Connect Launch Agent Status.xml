@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Jamf Connect Launch Agent Status</displayName>
+<description>Will return if Jamf Connect Launch Agent is Installed or Not Installed</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+#Kyle Ericson&#13;
+&#13;
+if [[ -e /Library/LaunchAgents/com.jamf.connect.plist ]]; then&#13;
+  echo "&lt;result&gt;Installed&lt;/result&gt;"&#13;
+&#13;
+else&#13;
+  echo "&lt;result&gt;Not Installed&lt;/result&gt;"&#13;
+fi&#13;
+&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
