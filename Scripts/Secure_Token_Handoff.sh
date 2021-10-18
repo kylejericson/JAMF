@@ -242,6 +242,7 @@ fi
 # diskutil apfs updatepreBoot /
 
 # This compared to the fact that enabling FileVault does add all existing Secure Token Holders automatically to the preBoot Filevault enabled users
+diskutil apfs updatepreBoot /
 
 else
 	echo "No user logged in"
