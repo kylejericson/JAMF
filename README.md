@@ -1,3 +1,3 @@
 # JAMF
 Everything JAMF
-I'm a Systems Engineer and I like to share my creations.
+I'm a Independent IT Consultant and I like to share my creations.
