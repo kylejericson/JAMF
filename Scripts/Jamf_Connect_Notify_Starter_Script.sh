@@ -1,13 +1,13 @@
 ﻿#!/bin/zsh
 # Jamf Connect Starter Script
+# Update Line 21 and line 27 replacing the number and org name
+
 #variables
 NOTIFY_LOG="/var/tmp/depnotify.log"
 #For TOKEN_BASIC, use same file path location as set for OIDCIDTokenPath in com.jamf.connect.login
 TOKEN_BASIC="/private/tmp/token"
 TOKEN_GIVEN_NAME=$(echo "$(cat $TOKEN_BASIC)" | sed -e 's/\"//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep given_name | cut -d ":" -f2)
 TOKEN_UPN=$(echo "$(cat $TOKEN_BASIC)" | sed -e 's/\"//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep upn | cut -d ":" -f2)
-ORG_NAME="Organization"
-NUMBEROFPOLICES="15"
 
 
 echo $TOKEN_GIVEN_NAME
@@ -15,12 +15,14 @@ echo $TOKEN_UPN
 
 ### Update DeterminateManual to how many policies you have
 echo "STARTING RUN" >> $NOTIFY_LOG # Define the number of increments for the progress bar
-echo "Command: DeterminateManual: '$NUMBEROFPOLICES'" >> $NOTIFY_LOG
+# Update Polices here
+echo "Command: DeterminateManual: 15" >> $NOTIFY_LOG
 
 ###Jamf Triggers
 echo "Command: Image: /Library/Resources/logo.png" >> $NOTIFY_LOG
 echo "Command: MainTitle: Installing Apps and Settings." >> $NOTIFY_LOG
-echo "Command: MainText: Thanks for choosing a Mac at '$ORG_NAME'! We want you to have a few applications and settings configured before you get started with your new Mac. This process should take 10 to 20 minutes to complete. \n \n If you need additional software or help, please visit the Self Service app in your Applications folder or on your Dock.'" >> $NOTIFY_LOG
+# Update Org name here
+echo "Command: MainText: Thanks for choosing a Mac at Myorg! We want you to have a few applications and settings configured before you get started with your new Mac. This process should take 10 to 20 minutes to complete. \n \n If you need additional software or help, please visit the Self Service app in your Applications folder or on your Dock.'" >> $NOTIFY_LOG
 
 # Jamf Policy: 1
 echo "Status: Setting up your Mac 5% Complete..." >> $NOTIFY_LOG
