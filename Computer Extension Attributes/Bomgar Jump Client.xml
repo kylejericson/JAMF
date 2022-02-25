@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Bomgar Jump Client</displayName>
+<description>Checks to see if Bomgar Jump Client is Installed or Not Installed</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/bash&#13;
+&#13;
+# Check to see if Bomgar is installed&#13;
+&#13;
+files=(/Applications/.com.bomgar.scc.*)&#13;
+&#13;
+if [ -e "${files[0]}" ];&#13;
+then&#13;
+	RESULT="Installed"&#13;
+else&#13;
+	RESULT="Not Installed"&#13;
+&#13;
+fi&#13;
+echo "&lt;result&gt;$RESULT&lt;/result&gt;"</scriptContentsMac>
+</extensionAttribute>
