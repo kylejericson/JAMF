@@ -1,7 +1,7 @@
 #!/bin/zsh
 #	This will uninstall Jamf Connect and reset the login window
 # 	Created by Kyle Ericson
-#	Version 2.0
+#	Version 3.0
 
 # Get the logged in user's name
 FAKE_USER=$(/bin/echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/&&!/loginwindow/{print $3}')
@@ -11,7 +11,8 @@ CURRENT_USER=$(id -un $FAKE_USER)
 rm /usr/local/bin/authchanger
 rm /usr/local/lib/pam/pam_saml.so.2
 rm -r /Library/Security/SecurityAgentPlugins/JamfConnectLogin.bundle
-launchctl unload /Users/$CURRENT_USER/Library/LaunchAgents/com.jamf.connect.plist
+launchctl bootout /Users/$CURRENT_USER/Library/LaunchAgents/com.jamf.connect.plist
+#launchctl unload /Users/$CURRENT_USER/Library/LaunchAgents/com.jamf.connect.plist
 rm -rf /Users/$CURRENT_USER/Library/LaunchAgents/com.jamf.connect.plist
 killall 'Jamf Connect'
 rm -rf "/Applications/Jamf Connect.app"
