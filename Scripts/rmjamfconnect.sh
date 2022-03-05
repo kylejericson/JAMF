@@ -1,13 +1,14 @@
 #!/bin/zsh
 #	This will uninstall Jamf Connect and reset the login window
 # 	Created by Kyle Ericson
-#	Version 4.0
+#	Version 5.0
 echo "Created by Kyle Ericson"
 echo "email kyle@ericsontech.com"
 
 # Get the logged in user's name
 FAKE_USER=$(/bin/echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/&&!/loginwindow/{print $3}')
 CURRENT_USER=$(id -un $FAKE_USER)
+echo "Current User is: $CURRENT_USER"
 
 # Reset login window to default macOS
 /usr/local/bin/authchanger -reset
@@ -15,9 +16,9 @@ rm /usr/local/bin/authchanger
 rm /usr/local/lib/pam/pam_saml.so.2
 rm -r /Library/Security/SecurityAgentPlugins/JamfConnectLogin.bundle
 
-# Unload the Jamf Connect LaunchAgent
-/bin/launchctl unload /Library/LaunchAgents/com.jamf.connect.plist
+# Remove Jamf Connect LaunchAgents
 rm -rf /Library/LaunchAgents/com.jamf.connect.plist
+rm -rf /Library/LaunchAgents/com.jamf.connect.unlock.login.plist
 killall 'Jamf Connect'
 rm -rf "/Applications/Jamf Connect.app"
 
