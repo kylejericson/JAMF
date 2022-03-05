@@ -1,0 +1,36 @@
+Re-Enable Jamf Connect Login/disable Jamf Connect Notify
+(When doing a major macOS upgrade (e.g., upgrading from macOS 10.15.7 to macOS 11.0.1 or later this required)
+If ran via Jamf policy
+/usr/local/bin/authchanger -reset -jamfconnect
+If ran via Terminal
+sudo /usr/local/bin/authchanger -reset -jamfconnect
+
+
+Enable Jamf Connect Notify
+
+If ran via Jamf policy
+/usr/local/bin/authchanger -reset -JamfConnect -Notify
+If ran via Terminal
+sudo /usr/local/bin/authchanger -reset -JamfConnect -Notify
+
+
+Uninstall Jamf Connect
+
+If ran via Jamf policy
+curl -L "https://raw.githubusercontent.com/kylejericson/JAMF/master/Scripts/rmjamfconnect.sh" -o /tmp/rm.sh && sh /tmp/rm.sh
+If ran via Terminal
+curl -L "https://raw.githubusercontent.com/kylejericson/JAMF/master/Scripts/rmjamfconnect.sh" -o /tmp/rm.sh
+
+sudo sh /tmp/rm.sh
+
+Resources:
+
+https://docs.jamf.com/jamf-connect/2.9.1/documentation/Re-enabling_the_Login_Window_after_a_Major_macOS_Upgrade.html
+
+https://docs.jamf.com/jamf-connect/2.9.1/documentation/Uninstalling_Jamf_Connect.html#ID-000087dc
+
+https://docs.jamf.com/jamf-connect/2.9.1/documentation/Jamf_Connect_Logs.html
+
+https://docs.jamf.com/jamf-connect/2.9.1/documentation/Unmigrating_a_Local_Account.html
+
+https://docs.jamf.com/jamf-connect/2.9.1/documentation/Editing_the_macOS_loginwindow_Application.html
