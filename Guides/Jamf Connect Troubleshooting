@@ -1,5 +1,6 @@
 Re-Enable Jamf Connect Login/disable Jamf Connect Notify
 (When doing a major macOS upgrade (e.g., upgrading from macOS 10.15.7 to macOS 11.0.1 or later this required)
+
 If ran via Jamf policy
 /usr/local/bin/authchanger -reset -jamfconnect
 If ran via Terminal
