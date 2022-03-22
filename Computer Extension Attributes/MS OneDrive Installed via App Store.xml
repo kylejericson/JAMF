@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>MS OneDrive Installed via App Store</displayName>
+<description>Will return Yes or No&#13;
+Yes= Installed via App Store&#13;
+No= Not Installed via App Store</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+&#13;
+if [[ -e /Applications/OneDrive.app/Contents/_MASReceipt ]]; then&#13;
+  echo "&lt;result&gt;Yes&lt;/result&gt;"&#13;
+&#13;
+else&#13;
+  echo "&lt;result&gt;No&lt;/result&gt;"&#13;
+fi&#13;
+&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
