@@ -1,4 +1,11 @@
-﻿#Connect to Azure
+﻿#Created by Kyle Ericson
+#Version 1.0
+#Adds the onpremisessamaccountname to the jamf connect token from Azure AD
+
+#Based on this workflow from here:
+# https://securecloud.blog/2019/06/06/add-samaccountname-to-azure-ad-access-token-jwt-with-claims-mapping-policy-and-avoiding-aadsts50146/
+
+#Connect to Azure
 AzureADPreview\Connect-AzureAD
 
 #Create Azure AD Policy
@@ -41,7 +48,7 @@ Get-AzureADPolicy | Select-String "JamfConnectClaimsPolicy1"
 #Add-AzureADServicePrincipalPolicy -Id “object id of jamf connect app” -RefObjectId “Id of claims policy”
 #Add-AzureADServicePrincipalPolicy -Id “ID1” -RefObjectId “ID2”
 
-#Remove Azure AD claims mapping policy
+#Remove Azure AD claims mapping policy (Only if you want to revert the change)
 #Remove-AzureADServicePrincipalPolicy -Id “object id of jamf connect app” -PolicyId “Id of claims policy”
 #Remove-AzureADServicePrincipalPolicy -Id “ID1” -PolicyId “ID2”
 
