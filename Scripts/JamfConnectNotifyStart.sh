@@ -1,6 +1,9 @@
 #!/bin/zsh
 # Created by Kyle Ericson
-# Version 1.0
+# Version 2.0
+# Jamf Connect Notify Start
+# Note you will need to ensure Jamf Connect is set to run in Notify Mode like this:
+# /usr/local/bin/authchanger -reset -JamfConnect -Notify
 # Credits to this script which some items were used from https://raw.githubusercontent.com/jamf/DEPNotify-Starter/master/depNotify.sh
 
 ORG_NAME="My Org Name"
