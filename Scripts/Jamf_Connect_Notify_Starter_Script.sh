@@ -2,6 +2,9 @@
 # Jamf Connect Starter Script
 # Update Line 21 and line 27 replacing the number and org name
 
+# Caffeinate Mac to keep awake
+/usr/bin/caffeinate -d -i -m -u & caffeinatePID=$!
+
 #variables
 NOTIFY_LOG="/var/tmp/depnotify.log"
 #For TOKEN_BASIC, use same file path location as set for OIDCIDTokenPath in com.jamf.connect.login
@@ -107,5 +110,8 @@ echo "Command: Quit" >> $NOTIFY_LOG
 sleep 1
 rm -rf $NOTIFY_LOG
  
+ # Kill caffeinate process
+kill "$caffeinatePID"
+
 #6 - Disable notify screen from loginwindow process
 /usr/local/bin/authchanger -reset -JamfConnect
