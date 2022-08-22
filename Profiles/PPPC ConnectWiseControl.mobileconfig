@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>ConnectWiseControl PPPC</string>
+			<key>PayloadDisplayName</key>
+			<string>ConnectWiseControl PPPC</string>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>BEE165E6-42EE-4647-AC05-90A9F7A1E97F</string>
+			<key>PayloadOrganization</key>
+			<string>ConnectWise</string>
+			<key>PayloadType</key>
+			<string>com.apple.TCC.configuration-profile-policy</string>
+			<key>PayloadUUID</key>
+			<string>BEE165E6-42EE-4647-AC05-90A9F7A1E97F</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>Services</key>
+			<dict>
+				<key>Accessibility</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<integer>1</integer>
+						<key>CodeRequirement</key>
+						<string>identifier "com.screenconnect.client.access" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "K8M3XDZV9Y"</string>
+						<key>Identifier</key>
+						<string>com.screenconnect.client.access</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<integer>1</integer>
+						<key>CodeRequirement</key>
+						<string>identifier "com.screenconnect.client" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = K8M3XDZV9Y</string>
+						<key>Identifier</key>
+						<string>com.screenconnect.client</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<integer>1</integer>
+						<key>CodeRequirement</key>
+						<string>identifier "com.apple.bash" and anchor apple</string>
+						<key>Identifier</key>
+						<string>/bin/bash</string>
+						<key>IdentifierType</key>
+						<string>path</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+				</array>
+				<key>AppleEvents</key>
+				<array>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.systemevents" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.systemevents</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<integer>1</integer>
+						<key>CodeRequirement</key>
+						<string>identifier "com.screenconnect.client.access" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "K8M3XDZV9Y"</string>
+						<key>Identifier</key>
+						<string>com.screenconnect.client.access</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.systemevents" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.systemevents</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<integer>1</integer>
+						<key>CodeRequirement</key>
+						<string>identifier "com.apple.bash" and anchor apple</string>
+						<key>Identifier</key>
+						<string>/bin/bash</string>
+						<key>IdentifierType</key>
+						<string>path</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+				</array>
+				<key>ScreenCapture</key>
+				<array>
+					<dict>
+						<key>Authorization</key>
+						<string>AllowStandardUserToSetSystemService</string>
+						<key>CodeRequirement</key>
+						<string>identifier "com.screenconnect.client.access" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "K8M3XDZV9Y"</string>
+						<key>Identifier</key>
+						<string>com.screenconnect.client.access</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Authorization</key>
+						<string>AllowStandardUserToSetSystemService</string>
+						<key>CodeRequirement</key>
+						<string>identifier "com.screenconnect.client" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = K8M3XDZV9Y</string>
+						<key>Identifier</key>
+						<string>com.screenconnect.client</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+						<key>StaticCode</key>
+						<integer>0</integer>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string></string>
+	<key>PayloadDisplayName</key>
+	<string>PPPC ConnectWiseControl</string>
+	<key>PayloadEnabled</key>
+	<true/>
+	<key>PayloadIdentifier</key>
+	<string>D0132371-D0AF-4CA2-985D-B67A1E5108C8</string>
+	<key>PayloadOrganization</key>
+	<string>The Amherst Group</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>D0132371-D0AF-4CA2-985D-B67A1E5108C8</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

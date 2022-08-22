@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>NinjaOne</displayName>
+<description>Checks if the NinjaOne LaunchAgent is Installed or Not Installed&#13;
+Will return&#13;
+Installed or Not Installed</description>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/sh&#13;
+if [ -f "/Applications/NinjaRMMAgent/programfiles/ninjarmm-macagent" ]; then echo "&lt;result&gt;Installed&lt;/result&gt;"; else echo "&lt;result&gt;Not Installed&lt;/result&gt;";  &#13;
+fi&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
