@@ -140,7 +140,7 @@
 	<key>PayloadIdentifier</key>
 	<string>D0132371-D0AF-4CA2-985D-B67A1E5108C8</string>
 	<key>PayloadOrganization</key>
-	<string>The Amherst Group</string>
+	<string>ConnectWise</string>
 	<key>PayloadRemovalDisallowed</key>
 	<true/>
 	<key>PayloadScope</key>
