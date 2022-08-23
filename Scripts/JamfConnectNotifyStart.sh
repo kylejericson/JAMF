@@ -6,6 +6,10 @@
 # /usr/local/bin/authchanger -reset -JamfConnect -Notify
 # Credits to this script which some items were used from https://raw.githubusercontent.com/jamf/DEPNotify-Starter/master/depNotify.sh
 
+# Caffeinate Mac to keep awake
+/usr/bin/caffeinate -d -i -m -u & caffeinatePID=$!
+
+
 ORG_NAME="My Org Name"
 BANNER_IMAGE_PATH="/Library/Resources/logo.png"
 NOTIFY_LOG="/var/tmp/depnotify.log"
@@ -49,6 +53,11 @@ echo "Command: Quit" >> $NOTIFY_LOG
 sleep 1
 rm -rf $NOTIFY_LOG
  
-#Disable notify screen from loginwindow process
+#Disable notify screen from loginwindow process and remove script
 /usr/local/bin/authchanger -reset -JamfConnect
+rm -rf /usr/local/bin/start-jcnotify.sh
+
+# Kill caffeinate process
+kill "$caffeinatePID"
+
 exit 0
