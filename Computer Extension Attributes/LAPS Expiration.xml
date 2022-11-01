@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>LAPS Expiration</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/sh&#13;
+: '&#13;
+---------------------------&#13;
+| macOSLAPS EA Expiration |&#13;
+---------------------------&#13;
+| Captures the Expiration from the file outputted&#13;
+| to the filesystem and sends the result to jamf&#13;
+| in the following format:&#13;
+|     | Expiration: Expiration Date |&#13;
+------------------------------------------------------------&#13;
+| Created: Richard Purves - https://github.com/franton&#13;
+| Last Update By: Joshua D. Miller - josh.miller@outlook.com&#13;
+| Last Update Date: March 19, 2022&#13;
+------------------------------------------------------------&#13;
+'&#13;
+# Path to macOSLAPS binary&#13;
+LAPS=/usr/local/laps/macOSLAPS&#13;
+# Path to Password File&#13;
+EXP_FILE="/var/root/Library/Application Support/macOSLAPS-expiration"&#13;
+&#13;
+if [ -e $LAPS ] ; then&#13;
+    # Ask macOSLAPS to write out the current password and echo it for the Jamf EA&#13;
+    $LAPS -getPassword&#13;
+    CURRENT_EXPIRATION=$(/bin/cat "$EXP_FILE")&#13;
+    # Test $CURRENT_EXPIRATION to ensure there is a value&#13;
+    if [ -z "$CURRENT_EXPIRATION" ]; then&#13;
+        # Write no expiration date is present and send to&#13;
+        # jamf Pro&#13;
+        /bin/echo "&lt;result&gt;No Expiration Date Present&lt;/result&gt;"&#13;
+        exit 0&#13;
+    else&#13;
+        /bin/echo "&lt;result&gt;$CURRENT_EXPIRATION&lt;/result&gt;"&#13;
+        # Run macOSLAPS a second time to remove the Expiration file&#13;
+        # and expiration date file from the system&#13;
+        $LAPS&#13;
+    fi&#13;
+&#13;
+else&#13;
+	echo "&lt;result&gt;Not Installed&lt;/result&gt;"&#13;
+fi&#13;
+&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>

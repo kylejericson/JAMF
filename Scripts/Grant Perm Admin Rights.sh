@@ -1,6 +1,6 @@
 ﻿#!/bin/bash
 # Created by Kyle Ericson
-# Removes admin rights from current user
+# Add admin rights to current user
 
 U1=$(/bin/echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/&&!/loginwindow/{print $3}')
 U2=$(id -un $U1)
