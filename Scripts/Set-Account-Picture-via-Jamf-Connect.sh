@@ -10,7 +10,7 @@ if [ ! -f "$TOKEN_BASIC" ]; then
 fi
 
 # Get the email address from the token
-EMAIL=$(jq -r '.upn' < "$TOKEN_BASIC")
+EMAIL=$(cat "$TOKEN_BASIC" | grep -o '"upn":"[^"]*' | sed 's/"upn":"//')
 if [ -z "$EMAIL" ]; then
   echo "Error: Could not retrieve email address from token"
   exit 1
