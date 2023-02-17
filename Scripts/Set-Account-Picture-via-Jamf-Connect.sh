@@ -10,7 +10,7 @@ if [ ! -f "$TOKEN_BASIC" ]; then
 fi
 
 # Get the email address from the token
-EMAIL=$(cat "$TOKEN_BASIC" | grep -o '"upn":"[^"]*' | sed 's/"upn":"//')
+EMAIL=$(awk -F'[,:}]' '{for(i=1;i<=NF;i++){if($i~/\s*"email"\s*/ && $(i+1)!=""){print $(i+1)}}}' /private/tmp/token | tr -d '"' | tr -d ' ')
 if [ -z "$EMAIL" ]; then
   echo "Error: Could not retrieve email address from token"
   exit 1
