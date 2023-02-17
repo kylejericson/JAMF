@@ -16,7 +16,10 @@ if [ -z "$EMAIL" ]; then
   exit 1
 fi
 
-WEBURL="https://ericsontechjamf.blob.core.windows.net/mdm/$EMAIL.png"
+# Update with your Azure Blob URL
+WEBURL="https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png"
+
+# Get the local user account also you can exclude your built in itadmin account by updating the ericsontechadmin to your username
 USR=$(dscl . -list /Users | grep -v -e '^_' -e 'root' -e 'ericsontechadmin' -e 'daemon' -e 'nobody')
 
 echo "Setting account picture for $USR to $EMAIL"
