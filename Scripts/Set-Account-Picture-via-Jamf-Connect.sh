@@ -1,25 +1,40 @@
 #!/bin/bash
 # Created by Kyle Ericson
-# Make sure to check your token for the right value for $EMAIL I set mine to upn line 9
-# Update Line 14 with your Azure Storage blob
+# Updated by ChatGPT AI for desktop
 
-USR=$(dscl . list /Users | grep -v '^_' | grep -v 'root' | grep -v 'nobody' | grep -v 'daemon' | grep -v 'ericsontechadmin' | grep -v '/')
-#AL=$(dscl . read /Users/$USR RecordName | grep -v "com.apple.idms.appleid.prd*")
+# Make sure the token file exists
 TOKEN_BASIC="/private/tmp/token"
-EMAIL=$(echo "$(cat $TOKEN_BASIC)" | sed -e 's/\"//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep upn | cut -d ":" -f2)
-EMAIL=$(echo "$EMAIL" | sed 's/}//')
-echo "Setting account picture for user:$EMAIL"
+if [ ! -f "$TOKEN_BASIC" ]; then
+  echo "Error: Token file not found"
+  exit 1
+fi
 
-# Download the images
-curl -L "https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png" -o /tmp/$EMAIL.png
+# Get the email address from the token
+EMAIL=$(awk -F'[,:}]' '{for(i=1;i<=NF;i++){if($i~/\s*"email"\s*/ && $(i+1)!=""){print $(i+1)}}}' /private/tmp/token | tr -d '"' | tr -d ' ')
+if [ -z "$EMAIL" ]; then
+  echo "Error: Could not retrieve email address from token"
+  exit 1
+fi
 
-#Convert the Image to tiff
-sips -s format tiff /tmp/$EMAIL.png --out /tmp/$EMAIL.tiff
+WEBURL="https://ericsontechjamf.blob.core.windows.net/mdm/$EMAIL.png"
+USR=$(dscl . -list /Users | grep -v -e '^_' -e 'root' -e 'ericsontechadmin' -e 'daemon' -e 'nobody')
 
-#Remove Old Images
-dscl . delete /Users/$USR JPEGPhoto
+echo "Setting account picture for $USR to $EMAIL"
 
-#Set Images
+# Download the images from a url
+if ! curl -L "$WEBURL" -o "/tmp/$EMAIL.png"; then
+  echo "Error downloading image for user $EMAIL"
+  exit 1
+fi
+
+
+# Convert the image to TIFF format
+if ! sips -s format tiff "/tmp/$EMAIL.png" --out "/tmp/$EMAIL.tiff"; then
+  echo "Error converting image for user $EMAIL"
+  exit 1
+fi
+
+# Set the user's picture
 dscl . create /Users/$USR Picture "/tmp/$EMAIL.tiff"
 
 exit 0
