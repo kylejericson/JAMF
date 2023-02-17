@@ -2,6 +2,8 @@
 # Created by Kyle Ericson
 # Updated by ChatGPT AI for desktop
 
+WEBURL="https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png"
+
 # Make sure the token file exists
 TOKEN_BASIC="/private/tmp/token"
 if [ ! -f "$TOKEN_BASIC" ]; then
@@ -18,11 +20,12 @@ fi
 
 echo "Setting account picture for user: $EMAIL"
 
-# Download the images
-if ! curl -L "https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png" -o "/tmp/$EMAIL.png"; then
+# Download the images from a url
+if ! curl -L "$WEBURL" -o "/tmp/$EMAIL.png"; then
   echo "Error downloading image for user $EMAIL"
   exit 1
 fi
+
 
 # Convert the image to TIFF format
 if ! sips -s format tiff "/tmp/$EMAIL.png" --out "/tmp/$EMAIL.tiff"; then
