@@ -2,9 +2,6 @@
 # Created by Kyle Ericson
 # Updated by ChatGPT AI for desktop
 
-WEBURL="https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png"
-USR=$(dscl . -list /Users | grep -v -e '^_' -e 'root' -e 'ericsontechadmin' -e 'daemon' -e 'nobody')
-
 # Make sure the token file exists
 TOKEN_BASIC="/private/tmp/token"
 if [ ! -f "$TOKEN_BASIC" ]; then
@@ -18,6 +15,9 @@ if [ -z "$EMAIL" ]; then
   echo "Error: Could not retrieve email address from token"
   exit 1
 fi
+
+WEBURL="https://ericsontechjamf.blob.core.windows.net/mdm/$EMAIL.png"
+USR=$(dscl . -list /Users | grep -v -e '^_' -e 'root' -e 'ericsontechadmin' -e 'daemon' -e 'nobody')
 
 echo "Setting account picture for $USR to $EMAIL"
 
