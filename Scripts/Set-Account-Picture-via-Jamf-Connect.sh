@@ -3,6 +3,7 @@
 # Updated by ChatGPT AI for desktop
 
 WEBURL="https://myazureblobname.blob.core.windows.net/mdm/$EMAIL.png"
+USR=$(dscl . -list /Users | grep -v -e '^_' -e 'root' -e 'ericsontechadmin' -e 'daemon' -e 'nobody')
 
 # Make sure the token file exists
 TOKEN_BASIC="/private/tmp/token"
@@ -18,7 +19,7 @@ if [ -z "$EMAIL" ]; then
   exit 1
 fi
 
-echo "Setting account picture for user: $EMAIL"
+echo "Setting account picture for $USR to $EMAIL"
 
 # Download the images from a url
 if ! curl -L "$WEBURL" -o "/tmp/$EMAIL.png"; then
@@ -34,7 +35,6 @@ if ! sips -s format tiff "/tmp/$EMAIL.png" --out "/tmp/$EMAIL.tiff"; then
 fi
 
 # Set the user's picture
-USR=$(id -u)
 dscl . create /Users/$USR Picture "/tmp/$EMAIL.tiff"
 
 exit 0
