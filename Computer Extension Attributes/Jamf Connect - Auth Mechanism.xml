@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Jamf Connect - Auth Mechanism</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+&#13;
+security authorizationdb read system.login.console &gt; /var/tmp/system.login.console.plist&#13;
+&#13;
+isJamfConnectFullMechanismEnabled=$(/usr/libexec/PlistBuddy -c "print :mechanisms" /var/tmp/system.login.console.plist | grep -c "JamfConnectLogin:LoginUI")&#13;
+isJamfConnectDemobilizeMechanismEnabled=$(/usr/libexec/PlistBuddy -c "print :mechanisms" /var/tmp/system.login.console.plist | grep -c "JamfConnectLogin:DeMobilize,privileged")&#13;
+&#13;
+if [[ "$isJamfConnectFullMechanismEnabled" -eq "1" ]]; then&#13;
+	echo "&lt;result&gt;Full&lt;/result&gt;"&#13;
+elif [[ "$isJamfConnectFullMechanismEnabled" -eq "0" &amp;&amp; "$isJamfConnectDemobilizeMechanismEnabled" -eq "1" ]]; then&#13;
+	echo "&lt;result&gt;Demobilize Only&lt;/result&gt;"&#13;
+elif [[ "$isJamfConnectFullMechanismEnabled" -eq "0" &amp;&amp; "$isJamfConnectDemobilizeMechanismEnabled" -eq "0" ]]; then&#13;
+	echo "&lt;result&gt;Disabled&lt;/result&gt;"&#13;
+else&#13;
+	echo "&lt;result&gt;Undetermined&lt;/result&gt;"&#13;
+fi&#13;
+&#13;
+rm /var/tmp/system.login.console.plist</scriptContentsMac>
+</extensionAttribute>
