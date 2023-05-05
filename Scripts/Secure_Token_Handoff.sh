@@ -1,41 +1,8 @@
-﻿#!/bin/bash
+#!/bin/bash
 #Script to grant secure token to another user.
 #Add a loop for waiting got the macOS dekstop to load.
 #Credits to Travelling Tech Guy
 # Version 1.0
-
-function wait_for_gui () {
-    # Wait for the dock to determine the current user
-    DOCK_STATUS=$(pgrep -x Dock)
-    echo "Waiting for Desktop..."
-
-    while [[ "$DOCK_STATUS" == "" ]]; do
-        echo "Desktop is not loaded; waiting..."
-        sleep 5
-        DOCK_STATUS=$(pgrep -x Dock)
-    done
-
-	CURRENT_USER=$(/bin/echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/&&!/loginwindow/{print $3}')
-    echo "$CURRENT_USER is logged in and at the desktop; continuing."
-}
-
-wait_for_gui
-
-# Travelling Tech Guy - 7/12/18 - V1.0
-# Script created as proof of concept for blogpost https://travellingtechguy.eu/script-secure-tokens-mojave
-
-# The idea is to run this prior to enabling FileVault remotely.
-# This to ensure we have the correct Secure Tokens in place in case you want to manipulate Secure Tokens with an 'IT Admin' accouont later.
-# Mainly to avoid ending up with a FileVault Enabled Mac, with only a tokenised non-admin enduser.
-
-# Script below uses $4 and $5 to pass the "IT Admin" credentials, but I would recommend to have a look at the GitHub link below to add more security.
-# Encrypt Admin credentials passed via script in Jamf Pro: https://github.com/jamfit/Encrypted-Script-Parameters/blob/master/EncryptedStrings_Bash.sh
-
-# Flying Dutch Sysadmin - 23/01/19 - V1.2
-# Added Checks : - Check if an admin account exists, and if it does if it is admin , if not the script fixes it. 
-# Echo statements provided for troubleshooting.
-
-# AS ALWAYS: script provided AS IS. Mainly a proof of concept for the above blogpost. TEST and EVALUATE before using it in production.
 
 
 # Check if a User is logged in
@@ -44,19 +11,15 @@ if pgrep -x "Finder" \
 && [ "$CURRENTUSER" != "_mbsetupuser" ]; then
 
 ###### Vars to update###################################
-
 # additional Admin credentials
 addAdminUser=$4
-#add encryption
 addAdminUserPassword=$5
-PROMPT_TITLE="Enter your Mac Password"
-LOGO="/Library/Resources/logo.png"
-
+PROMPT_TITLE=$6
+LOGO=$7
 ###### Vars to update###################################
 
 # Prompt for password
 CURRENT_USER=$(/bin/echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/&&!/loginwindow/{print $3}')
-
 
 # Validate logo file. If no logo is provided or if the file cannot be found at
 # specified path, default to the FileVault icon.
@@ -72,9 +35,6 @@ LOGO_POSIX="$(/usr/bin/osascript -e 'tell application "System Events" to return 
 USER_ID=$(/usr/bin/id -u "$CURRENT_USER")
 L_ID=$USER_ID
 L_METHOD="asuser"
-
-
-
 
 # Check if the admin provided exists on the system
 		if [[ $("/usr/sbin/dseditgroup" -o checkmember -m $addAdminUser admin / 2>&1) =~ "Unable" ]]; then
@@ -213,11 +173,7 @@ fi
 				# If end user is a non-admin token holder and our additional admin does not have a Token yet
 
 				if [[ $userType = "Not admin" && $userToken = "true" && $adminToken = "false" ]]; then
-				echo "Houston we have a problem!"
-				#Here you could update an extension attribute (API CALL) to group problematic Macs in a smart group.
-				#The only workaround to fix this is to promote the end user to admin, leverage it to manipulate the tokens and demote it again.
-				#I tried it, it works and it does not harm the tokens.
-				#dscl . -append /groups/admin GroupMembership $userName
+				echo "Promote the enduser to admin to grant token to local itadmin and demote enduser to standard account again"
                 /usr/sbin/dseditgroup -o edit -a $userName -t user admin
 				echo "End user promoted to admin!"
 
@@ -232,16 +188,7 @@ fi
 				#exit 1
 				fi
 
-# Here you could call a custom trigger to run a jamf Policy enabling FileVault
-#	or update smartgroup via 'jamf recon' to push a Configuration Profile to enable Filevault via an extension attribute (API CALL.
 
-# In case you are running this script on Macs where FileVault was already enabled, your admin account will still get a Secure Token,
-#	... unless your non-admin end user was the only token holder.
-# However, creating Secure Tokens post FileVault enablement does not make the account show up ad preBoot automatically.
-# 	... you will need to run the following command to do so.
-# diskutil apfs updatepreBoot /
-
-# This compared to the fact that enabling FileVault does add all existing Secure Token Holders automatically to the preBoot Filevault enabled users
 diskutil apfs updatepreBoot /
 
 else
