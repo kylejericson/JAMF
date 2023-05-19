@@ -17,7 +17,6 @@ clear
 
 listUsers="$(/usr/bin/dscl . list /Users UniqueID | awk '$2 > 1000 {print $1}') FINISHED"
 FullScriptName=`basename "$0"`
-ShowVersion="$FullScriptName $Version"
 check4AD=`/usr/bin/dscl localhost -list . | grep "Active Directory"`
 
 # Save current IFS state
