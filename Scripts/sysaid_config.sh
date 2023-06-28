@@ -14,6 +14,7 @@
 
 
 # Set the variables with the desired values
+# For Jamf Pro use add set var to $4, $5 , $6 for sysAidServerURL, accountID, serial
 sysAidServerURL="" # Example https://myorg.sysaidit.com
 accountID="" # Example myorg
 serial="" # Example 1AAA1AAAA111A11A
