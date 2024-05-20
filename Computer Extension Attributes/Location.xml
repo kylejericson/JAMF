@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><extensionAttribute>
+<displayName>Location</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/zsh&#13;
+&#13;
+# provide for Big Sur and earlier&#13;
+xpath() {&#13;
+	# the xpath tool changes in Big Sur &#13;
+	if [[ $( /usr/bin/sw_vers -buildVersion) &gt; "20A" ]]; then&#13;
+		/usr/bin/xpath -e "$@"&#13;
+	else&#13;
+		/usr/bin/xpath "$@"&#13;
+	fi&#13;
+}&#13;
+ &#13;
+# get public IP address&#13;
+publicIP=$( /usr/bin/curl http://ifconfig.me/ip \&#13;
+--location \&#13;
+--silent \&#13;
+--max-time 10 )&#13;
+&#13;
+# get GeoIP data&#13;
+locationData=$( /usr/bin/curl http://ip-api.com/xml/$publicIP \&#13;
+--location \&#13;
+--silent \&#13;
+--max-time 10  )&#13;
+&#13;
+locationPieces=( country countryCode region regionName city zip lat lon timezone isp org as )&#13;
+&#13;
+for anItem in $locationPieces&#13;
+do&#13;
+	export $anItem="$( xpath "/query/$anItem/text()" 2&gt;/dev/null &lt;&lt;&lt; "$locationData" )"&#13;
+done&#13;
+&#13;
+echo "&lt;result&gt;$country&#13;
+$countryCode&#13;
+$region&#13;
+$regionName&#13;
+$city&#13;
+$zip&#13;
+$lat&#13;
+$lon&#13;
+$timezone&#13;
+$isp&#13;
+$org&#13;
+$as&lt;/result&gt;"&#13;
+&#13;
+exit 0</scriptContentsMac>
+</extensionAttribute>
