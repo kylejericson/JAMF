@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Credits to Sean Rabbit with original version
+# Credits to Sean Rabbitt with original version
 # Updated by Kyle Ericson on 6/10/25 to address the DMG rename from Jamf.
 
 # Vendor supplied DMG file
